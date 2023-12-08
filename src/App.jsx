@@ -1,7 +1,7 @@
 import { Layout, Tabs } from "antd";
 import styled from "styled-components";
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
-import Segments from "./pages/Segments/Segments";
+import Segments from "./pages/SegmentsPage/Segments";
 import Users from "./pages/Users/Users";
 
 const { Header, Content } = Layout;
