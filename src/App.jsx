@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 
 import Users from "./pages/Users/Users";
+import Segments from "./pages/Segments/Segments.jsx";
 
 const { Header, Content } = Layout;
 
@@ -52,8 +53,8 @@ const App = () => {
       <Content>
         <Routes>
           <Route path="/" element={<Users />} />
+          <Route path="/segments" element={<Segments />} />
           <Route path="/analytics" element={<div>anal</div>} />
-          <Route path="/segments" element={<div>segments</div>} />
         </Routes>
       </Content>
     </StyledLayout>
