@@ -1,8 +1,9 @@
 import { Layout, Tabs } from "antd";
 import styled from "styled-components";
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
-import Segments from "./Pages/SegmentsPage/Segments";
-import Users from "./Pages/Users/Users";
+import Segments from "./pages/SegmentsPage/Segments";
+import Users from "./pages/Users/Users";
+import Analytics from './pages/Analytics/Analytics'
 
 const { Header, Content } = Layout;
 
@@ -53,7 +54,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Users />} />
           <Route path="/segments" element={<Segments />} />
-          <Route path="/analytics" element={<div>anal</div>} />
+          <Route path="/analytics" element={<Analytics />} />
         </Routes>
       </Content>
     </StyledLayout>
