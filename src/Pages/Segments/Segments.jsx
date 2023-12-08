@@ -277,7 +277,7 @@ const Segments = () => {
         </FiltersWrapper>
         <ActionsWrapper>
           <SegmentSelectWrapper>
-            <Dropdown menu={{ items }} placement="bottomCenter">
+            <Dropdown menu={{ items }} placement="bottom">
               <Button>{!selectedRows?.length ? 'Дії з користувачами сегменту': "Дії з обраними користувачами"}</Button>
             </Dropdown>
           </SegmentSelectWrapper>
