@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 
 import Users from "./pages/Users/Users";
-import Segments from "./pages/Segments/Segments.jsx";
+import Segments from "./pages/Segments/Segments";
 
 const { Header, Content } = Layout;
 
