@@ -17,15 +17,15 @@ const StyledLayout = styled(Layout)`
 const items = [
   {
     key: "",
+    label: "Users",
+  },
+  {
+    key: "analytics",
     label: "Analytics",
   },
   {
     key: "segments",
     label: "Segments",
-  },
-  {
-    key: "users",
-    label: "Users",
   },
 ];
 
@@ -51,9 +51,9 @@ const App = () => {
       />
       <Content>
         <Routes>
-          <Route path="/" element={<div>anal</div>} />
+          <Route path="/" element={<Users />} />
+          <Route path="/analytics" element={<div>anal</div>} />
           <Route path="/segments" element={<div>segments</div>} />
-          <Route path="/users" element={<Users />} />
         </Routes>
       </Content>
     </StyledLayout>
