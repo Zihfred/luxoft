@@ -9,13 +9,18 @@ const Wrapper = styled.div`
 const items = [
     {
         key: '1',
-        label: 'Analytics',
+        label: 'Users',
         children: "Content of 1 tab"
     },
     {
         key: '2',
-        label: 'Tables',
-        children: "Content of 2 tab"
+        label: 'Analytics',
+        children: "Content of 1 tab"
+    },
+    {
+        key: '3',
+        label: 'Segments',
+        children: "Content of 3 tab"
     }
 ]
 
