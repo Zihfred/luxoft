@@ -3,6 +3,7 @@ import { Table, Input, Button, Space } from "antd";
 import styled from "styled-components";
 import { SearchOutlined, DownloadOutlined, ClearOutlined} from "@ant-design/icons";
 import { CSVLink } from "react-csv";
+import CreateSegment from "../../components/CreateSegment/CreateSegment";
 
 const Data = [
   {
@@ -223,8 +224,9 @@ const Users = () => {
       >
         <Button icon={<ClearOutlined />} onChange={handleClearFilters}>Очистити фільри</Button>
         <CSVLink data={Data} filename={"Users.csv"}>
-          <Button type="primary" icon={<DownloadOutlined />} onChange={handleClearFilters}>Завантажити таблицю</Button>
+          <Button type="primary" icon={<DownloadOutlined />} onChange={handleClearFilters}>Завантажити</Button>
         </CSVLink>
+        <CreateSegment />
       </Space>
       <Table columns={columns} dataSource={Data} />
     </Wrapper>
