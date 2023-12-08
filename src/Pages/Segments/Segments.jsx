@@ -243,24 +243,42 @@ const Segments = () => {
         <p>Ви впевненні шо хочете здійснити цю дію</p>
       </Modal>
       <HeaderWrapper>
-        <SegmentSelectWrapper>
-          <div>Назва сегменту:</div>
-          <Select
-            popupMatchSelectWidth={false}
-            defaultValue="1"
-            style={{ width: 300 }}
-            onChange={onSegmentChange}
-            options={[
-              { value: '1', label: 'Ветерани більше 40 років Київська область' },
-              { value: '2', label: 'Ветерани менше 30 років Волинська область' },
-              { value: '3', label: 'Родичі ветеранів Полтавська область' },
-            ]}
-          />
-        </SegmentSelectWrapper>
+        <FiltersWrapper>
+          <SegmentSelectWrapper>
+            <div>Назва сегменту:</div>
+            <Select
+              popupMatchSelectWidth={false}
+              defaultValue="1"
+              style={{ width: 300 }}
+              onChange={onSegmentChange}
+              options={[
+                { value: '1', label: 'Ветерани більше 40 років Київська область' },
+                { value: '2', label: 'Ветерани менше 30 років Волинська область' },
+                { value: '3', label: 'Родичі ветеранів Полтавська область' },
+              ]}
+            />
+          </SegmentSelectWrapper>
+          <SegmentSelectWrapper>
+            <div>Дата останньої активності:</div>
+            <Select
+              popupMatchSelectWidth={false}
+              defaultValue="1timesPerThreeMeth"
+              style={{ width: 300 }}
+              onChange={onSegmentChange}
+              options={[
+                { value: '7days', label: 'до 7 днів назад' },
+                { value: '14days', label: 'до 14 днів назад' },
+                { value: '21day', label: 'до 21-го дня назад' },
+                { value: '1timesPerMonth', label: 'до місяца назад' },
+                { value: '1timesPerThreeMeth', label: 'до трьох місяців назад' },
+              ]}
+            />
+          </SegmentSelectWrapper>
+        </FiltersWrapper>
         <ActionsWrapper>
           <SegmentSelectWrapper>
             <Dropdown menu={{ items }} placement="bottomCenter">
-              <Button>{!selectedRows?.length ? 'Дії зі всіми користувачами': "Дії з обраними користувачами"}</Button>
+              <Button>{!selectedRows?.length ? 'Дії з користувачами сегменту': "Дії з обраними користувачами"}</Button>
             </Dropdown>
           </SegmentSelectWrapper>
         </ActionsWrapper>
@@ -306,14 +324,18 @@ const StyledTd = styled.td`
   `
 const HeaderWrapper = styled.div`
   display: flex;
-  gap: 120px
+  gap: 18px;
+  align-items: flex-start;
   `
 
 const SegmentSelectWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 40px;
+  justify-content: space-between;
+  &:not(:last-child) {
+    margin-bottom: 18px;
+  }
 `
 const TableWrapper = styled.div`
   margin: 40px 0;
@@ -326,5 +348,16 @@ const ActionsWrapper = styled.div`
   display: flex;
   gap: 10px;
   `
+
+const FiltersWrapper = styled.div`
+    background-color: white;
+    padding: 10px;
+    border: 1px solid lightgrey;
+    border-radius: 6px;
+    display: flex;
+  justify-content: center;
+  //align-items: center;
+  flex-direction: column;
+`
 
 export default Segments;
