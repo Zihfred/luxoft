@@ -204,7 +204,7 @@ const Users = () => {
         <Button icon={<ClearOutlined />} onChange={handleClearFilters}>
           Очистити фільри
         </Button>
-        {!loading && users.length && (
+        {!loading && !!users.length && (
           <CSVLink data={users} filename={"Users.csv"}>
             <Button
               type="primary"
