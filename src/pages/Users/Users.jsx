@@ -161,7 +161,7 @@ const Users = () => {
         phoneNumber,
         idRegion: regionName,
         idUserStatus: statusName,
-        lastActivityDate: dayjs(lastActivityDate).format('YYYY-MM-DD'),
+        lastActivityDate: dayjs(lastActivityDate).format('DD.MM.YYYY'),
         createdAt,
         updatedAt,
         birthday: age || 0,
