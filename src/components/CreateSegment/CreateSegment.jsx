@@ -5,6 +5,25 @@ import { createSegment, getAllRegions } from "../../api";
 
 const { Option } = Select;
 
+const statuses = [
+  {
+    _id: "65735ef5997f0a6e91d4deac",
+    userStatusName: "військовослужбовці, які брали безпосередню участь у заходах, необхідних для забезпечення оборони України, захисту безпеки населення та інтересів держави, та були звільнені з військової служби, зокрема демобілізовані у визначеному законом порядку",
+  },
+  {
+    _id: "65735ede997f0a6e91d4deab",
+    userStatusName: "члени сімей загиблих (померлих) ветеранів війни, Захисників і Захисниць України",
+  },
+  {
+    _id: "65735ece997f0a6e91d4deaa",
+    userStatusName: "члени сімей ветеранів війни та осіб, які мають особливі заслуги перед Батьківщиною",
+  },
+  {
+    _id: "657355c1997f0a6e91d4dea6",
+    userStatusName: "ветерани війни, особи, які мають особливі заслуги перед Батьківщиною",
+  },
+];
+
 const CollectionCreateForm = ({ open, onCreate, onCancel, regions }) => {
   const [form] = Form.useForm();
 
@@ -61,9 +80,11 @@ const CollectionCreateForm = ({ open, onCreate, onCancel, regions }) => {
         </Form.Item>
         <Form.Item name="idUserStatus" label="Фільтр по статусу особи">
           <Select placeholder="Виберіть статус зі списку" allowClear>
-            <Option value="1">Віськовий</Option>
-            <Option value="2">Ветаран</Option>
-            <Option value="3">Родич ветарана</Option>
+            {statuses?.map((status) => (
+                 <Option key={status._id} value={status._id}>
+                 {status.userStatusName}
+               </Option>
+            ))}
           </Select>
         </Form.Item>
       </Form>
@@ -77,7 +98,7 @@ const CreateSegment = () => {
   const onCreate = (values) => {
     console.log("Received values of form: ", values);
     setOpen(false);
-    createSegment(values)
+    createSegment(values);
   };
 
   useEffect(() => {
