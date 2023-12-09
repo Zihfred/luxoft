@@ -18,4 +18,11 @@ export const createSegment = (data) => {
     data
   })
 }
- 
+
+export const getSegments = (data) => {
+    return axios({
+        method: 'get',
+        url: "https://alpha.deadalice.xyz:4000/api/segments",
+        data
+    })
+}

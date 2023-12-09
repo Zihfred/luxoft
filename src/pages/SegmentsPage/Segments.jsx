@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Button, Dropdown, Modal, Select, Table } from "antd";
-import { useState } from "react";
+import {useEffect, useState} from "react";
+import {getSegments} from "../../api.js";
 
 const defaultData = [
   {
@@ -133,6 +134,9 @@ const Segments = () => {
   const [data, setData] = useState(defaultData);
   const [selectedRows, setSelectedRows] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [segments, setSegments] = useState([])
+
   const columns = [
     {
       title: "First Name",
@@ -188,14 +192,12 @@ const Segments = () => {
       </div>,
     },
   ];
-  const onSegmentChange = (value) => {
-    if (value === "1") {
+  const onSegmentChange = () => {
+    if(Math.random() > 0.2) {
       setData(defaultData);
-    }
-    if (value === "2") {
+    } else if (Math.random() > 0.4) {
       setData(defaultData2);
-    }
-    if (value === "3") {
+    } else {
       setData(defaultData3);
     }
   }
@@ -231,6 +233,15 @@ const Segments = () => {
     setIsModalOpen(false);
   };
 
+  useEffect(()=>{
+    const fetchSegments = async ()=>{
+      const response = await getSegments()
+      setSegments(response.data.newSegments)
+    }
+
+    fetchSegments()
+  },[])
+
   return (
     <Wrapper>
       <Modal
@@ -248,14 +259,13 @@ const Segments = () => {
             <div>Назва сегменту:</div>
             <Select
               popupMatchSelectWidth={false}
-              defaultValue="1"
+              // defaultValue="1"
               style={{ width: 300 }}
               onChange={onSegmentChange}
-              options={[
-                { value: '1', label: 'Ветерани більше 40 років Київська область' },
-                { value: '2', label: 'Ветерани менше 30 років Волинська область' },
-                { value: '3', label: 'Родичі ветеранів Полтавська область' },
-              ]}
+              options={segments.map((segment) => ({
+                value: segment.segmentName,
+                label: segment.segmentName
+              }))}
             />
           </SegmentSelectWrapper>
           <SegmentSelectWrapper>
@@ -292,18 +302,12 @@ const Segments = () => {
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td>Ветерани більше 40 років Київська область</td>
-            <StyledTd>10</StyledTd>
-          </tr>
-          <tr>
-            <td>Ветерани менше 30 років Волинська область</td>
-            <StyledTd>40</StyledTd>
-          </tr>
-          <tr>
-            <td>Родичі ветеранів Полтавська область</td>
-            <StyledTd>11</StyledTd>
-          </tr>
+          {segments.map((segment) => (
+            <tr key={segment.id}>
+              <td>{segment.segmentName}</td>
+              <StyledTd>{segment.usersCount}</StyledTd>
+            </tr>
+          ))}
           </tbody>
         </table>
       </TableWrapper>
