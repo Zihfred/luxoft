@@ -1,16 +1,12 @@
 import { useState } from "react";
-import { Button, Form, Input, Modal, Select } from "antd";
+import { Button, Form, Input, Modal, Select, InputNumber } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
+
+const { Option } = Select;
 
 const CollectionCreateForm = ({ open, onCreate, onCancel }) => {
   const [form] = Form.useForm();
-  const options = [];
-  for (let i = 10; i < 36; i++) {
-    options.push({
-      label: i.toString(36) + i,
-      value: i.toString(36) + i,
-    });
-  }
+  const [phone, setPhone] = useState('(xxx)-xxx-xxx-x')
 
   return (
     <Modal
@@ -51,16 +47,47 @@ const CollectionCreateForm = ({ open, onCreate, onCancel }) => {
         >
           <Input />
         </Form.Item>
-        <Form.Item name="filters" label="Виберіть фільтри">
-          <Select
-            mode="multiple"
-            allowClear
-            style={{
-              width: "100%",
-            }}
-            placeholder="Виберіть фільтр"
-            options={options}
-          />
+        <Form.Item
+          name="age"
+          label="Фільтр по віку"
+          
+        >
+          <InputNumber />
+        </Form.Item>
+        <Form.Item
+          name="phoneNumber"
+          label="Фільтр по телефону"
+        >
+          <Input defaultValue={phone} onChange={(e) => {
+            setPhone(phone.replace('x', e.target.value))
+            form.getFieldValue(phone.replace('x', e.target.value))
+          }} />
+        </Form.Item>
+        <Form.Item
+          name="idRegion"
+          label="Фільтр по області"
+        >
+         <Select
+          placeholder="Виберіть область зі списку"
+          allowClear
+        >
+          <Option value="1">Черкаська</Option>
+          <Option value="2">Київська</Option>
+          <Option value="3">Полтавська</Option>
+        </Select>
+        </Form.Item>
+        <Form.Item
+          name="idUserStatus"
+          label="Фільтр по статусу особи"
+        >
+         <Select
+          placeholder="Виберіть статус зі списку"
+          allowClear
+        >
+          <Option value="1">Віськовий</Option>
+          <Option value="2">Ветаран</Option>
+          <Option value="3">Родич ветарана</Option>
+        </Select>
         </Form.Item>
       </Form>
     </Modal>

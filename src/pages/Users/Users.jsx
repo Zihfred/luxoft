@@ -122,13 +122,14 @@ const Users = () => {
 
   const transformUserData = (userData) => {
     return userData.map((user) => {
-      const { firstName, lastName, sureName, phoneNumber, idRegion, idUserStatus, lastActivityDate, createdAt, updatedAt, birthday } = user;
+      const { chatId, firstName, lastName, sureName, phoneNumber, idRegion, idUserStatus, lastActivityDate, createdAt, updatedAt, birthday } = user;
 
       const birthdayDate = new Date(birthday);
       const today = new Date();
       const age = today.getFullYear() - birthdayDate.getFullYear();
   
       return {
+        key: chatId,
         firstName,
         lastName,
         sureName,
