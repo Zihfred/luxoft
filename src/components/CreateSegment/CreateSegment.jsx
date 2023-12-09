@@ -58,10 +58,7 @@ const CollectionCreateForm = ({ open, onCreate, onCancel }) => {
           name="phoneNumber"
           label="Фільтр по телефону"
         >
-          <Input defaultValue={phone} onChange={(e) => {
-            setPhone(phone.replace('x', e.target.value))
-            form.getFieldValue(phone.replace('x', e.target.value))
-          }} />
+          <Input placeholder="+38(xxx)-xxx-xx-xx" phoneNumber />
         </Form.Item>
         <Form.Item
           name="idRegion"
