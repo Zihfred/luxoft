@@ -131,7 +131,7 @@ const defaultData3 = [
   },
 ];
 const Segments = () => {
-  const [data, setData] = useState(defaultData);
+  const [data, setData] = useState();
   const [selectedRows, setSelectedRows] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
