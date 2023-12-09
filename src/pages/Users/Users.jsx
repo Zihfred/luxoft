@@ -11,6 +11,25 @@ import { CSVLink } from "react-csv";
 import CreateSegment from "../../components/CreateSegment/CreateSegment";
 import { getAllRegions, getAllUsers } from "../../api";
 
+const statuses = [
+  {
+    _id: "65735ef5997f0a6e91d4deac",
+    userStatusName: "військовослужбовці, які брали безпосередню участь у заходах, необхідних для забезпечення оборони України, захисту безпеки населення та інтересів держави, та були звільнені з військової служби, зокрема демобілізовані у визначеному законом порядку",
+  },
+  {
+    _id: "65735ede997f0a6e91d4deab",
+    userStatusName: "члени сімей загиблих (померлих) ветеранів війни, Захисників і Захисниць України",
+  },
+  {
+    _id: "65735ece997f0a6e91d4deaa",
+    userStatusName: "члени сімей ветеранів війни та осіб, які мають особливі заслуги перед Батьківщиною",
+  },
+  {
+    _id: "657355c1997f0a6e91d4dea6",
+    userStatusName: "ветерани війни, особи, які мають особливі заслуги перед Батьківщиною",
+  },
+];
+
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -29,7 +48,7 @@ const Users = () => {
         setLoading(true);
         const usersData = await getAllUsers();
         const allRegions = await getAllRegions();
-        setUsers(transformUserData(usersData, allRegions));
+        setUsers(transformUserData(usersData, allRegions, statuses));
       } catch (error) {
         console.error("Error fetching users:", error);
       } finally {
@@ -122,7 +141,7 @@ const Users = () => {
     },
   });
 
-  const transformUserData = (userData, regions) => {
+  const transformUserData = (userData, regions, statuses) => {
     return userData.map((user) => {
       const { chatId, firstName, lastName, sureName, phoneNumber, idRegion, idUserStatus, lastActivityDate, createdAt, updatedAt, birthday } = user;
 
@@ -131,6 +150,8 @@ const Users = () => {
       const age = today.getFullYear() - birthdayDate.getFullYear();
       const region = regions.find((region) => region._id === idRegion);
       const regionName = region ? region.regionName : '';
+      const status = statuses.find((status) => status._id === idUserStatus);
+      const statusName = status ? status.userStatusName : '';
   
       return {
         key: chatId,
@@ -139,7 +160,7 @@ const Users = () => {
         sureName,
         phoneNumber,
         idRegion: regionName,
-        idUserStatus,
+        idUserStatus: statusName,
         lastActivityDate: dayjs(lastActivityDate).format('YYYY-MM-DD'),
         createdAt,
         updatedAt,
