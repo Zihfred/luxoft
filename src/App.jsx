@@ -18,15 +18,15 @@ const StyledLayout = styled(Layout)`
 const items = [
   {
     key: "",
-    label: "Users",
+    label: "Користувачі",
   },
   {
     key: "analytics",
-    label: "Analytics",
+    label: "Аналітика",
   },
   {
     key: "segments",
-    label: "Segments",
+    label: "Сегменти",
   },
 ];
 
