@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Table, Input, Button, Space } from "antd";
 import styled from "styled-components";
+import dayjs from 'dayjs';
 import {
   SearchOutlined,
   DownloadOutlined,
@@ -8,7 +9,7 @@ import {
 } from "@ant-design/icons";
 import { CSVLink } from "react-csv";
 import CreateSegment from "../../components/CreateSegment/CreateSegment";
-import { getAllUsers } from "../../api";
+import { getAllRegions, getAllUsers } from "../../api";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -27,7 +28,8 @@ const Users = () => {
       try {
         setLoading(true);
         const usersData = await getAllUsers();
-        setUsers(transformUserData(usersData));
+        const allRegions = await getAllRegions();
+        setUsers(transformUserData(usersData, allRegions));
       } catch (error) {
         console.error("Error fetching users:", error);
       } finally {
@@ -120,13 +122,15 @@ const Users = () => {
     },
   });
 
-  const transformUserData = (userData) => {
+  const transformUserData = (userData, regions) => {
     return userData.map((user) => {
       const { chatId, firstName, lastName, sureName, phoneNumber, idRegion, idUserStatus, lastActivityDate, createdAt, updatedAt, birthday } = user;
 
       const birthdayDate = new Date(birthday);
       const today = new Date();
       const age = today.getFullYear() - birthdayDate.getFullYear();
+      const region = regions.find((region) => region._id === idRegion);
+      const regionName = region ? region.regionName : '';
   
       return {
         key: chatId,
@@ -134,17 +138,15 @@ const Users = () => {
         lastName,
         sureName,
         phoneNumber,
-        idRegion,
+        idRegion: regionName,
         idUserStatus,
-        lastActivityDate,
+        lastActivityDate: dayjs(lastActivityDate).format('YYYY-MM-DD'),
         createdAt,
         updatedAt,
         birthday: age || 0,
       };
     });
   };
-
-  console.log(transformUserData(users))
 
   const columns = [
     {
